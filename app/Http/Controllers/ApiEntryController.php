@@ -8,16 +8,24 @@ use App\Services\ReadDataApiService\ReadDataApi;
 class ApiEntryController extends Controller
 {
     //
-    public function insertApiRecords(ReadDataApi $readDataApi)
+
+    protected $readDataApi;
+
+    public function __construct(ReadDataApi $readDataApi)
+    {
+        $this->readDataApi = $readDataApi;
+    }
+
+    public function insertApiRecords()
     {
 
         try {
 
-            $readDataApi->getApiEntry();
+            $this->readDataApi->getApiEntry();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
 
-        return 'Success';
+        return 'Operation Successful';
     }
 }
