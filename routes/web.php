@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiEntryController;
+use App\Services\ReadDataApiService\ReadDataApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test', function (ReadDataApi $readDataApi) {
+    return $readDataApi->getApiEntry();
 });
+
+Route::get('/public/endpoint', [ApiEntryController::class, 'insertApiRecords']);
